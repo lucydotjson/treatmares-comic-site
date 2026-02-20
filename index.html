@@ -3,25 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Treatmares Webcomic Store - Explore our collection of main stories, mini comics, and comedy series.">
+<meta name="theme-color" content="#1a0033">
 <title>Treatmares Webcomic Store</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
 
-/* === BACKGROUND ANIMATION === */
-body {
-    margin: 0;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    color: #ffffff;
-    background: linear-gradient(135deg, #1a0033 0%, #330055 25%, #1a0033 50%, #330055 75%, #1a0033 100%);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-    overflow-x: hidden;
-    position: relative;
+:root {
+    --primary: #ff4fd8;
+    --secondary: #00eaff;
+    --accent: #ffff00;
+    --dark-bg: #1a0033;
+    --card-bg: rgba(30, 10, 60, 0.8);
+    --shadow-sm: 0 0 20px rgba(255, 79, 216, 0.4);
+    --shadow-md: 0 0 40px rgba(255, 79, 216, 0.8);
 }
 
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+/* === BACKGROUND === */
+body {
+    margin: 0;
+    font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #ffffff;
+    background: linear-gradient(135deg, #1a0033 0%, #330055 50%, #1a0033 100%);
+    background-attachment: fixed;
+    overflow-x: hidden;
+    position: relative;
 }
 
 body::before {
@@ -29,178 +37,199 @@ body::before {
     position: fixed;
     top: 0;
     left: 0;
-    width: 200%;
+    width: 100%;
     height: 100%;
     background-image: 
-        radial-gradient(circle at 20% 50%, rgba(255, 79, 216, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(0, 234, 255, 0.1) 0%, transparent 50%);
-    animation: moveGlow 8s ease-in-out infinite;
+        radial-gradient(circle at 20% 50%, rgba(255, 79, 216, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 234, 255, 0.08) 0%, transparent 50%);
     z-index: 0;
     pointer-events: none;
 }
 
-@keyframes moveGlow {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(-50px, -50px); }
-}
-
+/* Halftone pattern dots */
 body::after {
     content: "";
     position: fixed;
+    width: 100%;
+    height: 100%;
     top: 0;
     left: 0;
-    width: 200%;
-    height: 200%;
     background-image: 
-        repeating-linear-gradient(0deg, transparent 0px, transparent 59px, rgba(255, 79, 216, 0.15) 59px, rgba(255, 79, 216, 0.15) 60px),
-        repeating-linear-gradient(90deg, transparent 0px, transparent 59px, rgba(0, 234, 255, 0.15) 59px, rgba(0, 234, 255, 0.15) 60px),
-        radial-gradient(circle at 30% 70%, rgba(255, 79, 216, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 70% 30%, rgba(0, 234, 255, 0.08) 0%, transparent 40%);
-    background-size: 100px 100px, 100px 100px, 200% 200%, 200% 200%;
-    animation: moveGridComplex 30s linear infinite, floatBg 15s ease-in-out infinite;
-    z-index: -1;
+        radial-gradient(circle, rgba(255, 79, 216, 0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
     pointer-events: none;
-}
-
-@keyframes moveGridComplex {
-    0% { background-position: 0 0, 0 0, 0% 50%, 0% 50%; }
-    50% { background-position: 60px 60px, 60px 60px, 100% 50%, 100% 50%; }
-    100% { background-position: 0 0, 0 0, 0% 50%, 0% 50%; }
-}
-
-@keyframes floatBg {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-30px) rotate(2deg); }
-}
-
-/* Comic Splash Effects */
-html::before {
-    content: "";
-    position: fixed;
-    top: 10%;
-    left: 5%;
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, rgba(255, 79, 216, 0.1) 0%, transparent 70%);
-    border-radius: 50%;
-    filter: blur(40px);
-    animation: splashFloat 8s ease-in-out infinite;
     z-index: 0;
-    pointer-events: none;
-}
-
-@keyframes splashFloat {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(30px, 30px) scale(1.1); }
-}
-
-html::after {
-    content: "";
-    position: fixed;
-    bottom: 15%;
-    right: 8%;
-    width: 250px;
-    height: 250px;
-    background: radial-gradient(circle, rgba(0, 234, 255, 0.12) 0%, transparent 70%);
-    border-radius: 50%;
-    filter: blur(50px);
-    animation: splashFloat2 10s ease-in-out infinite reverse;
-    z-index: 0;
-    pointer-events: none;
 }
 
 /* === HEADER === */
 header {
-    text-align: center;
-    padding: 40px;
-    background: linear-gradient(135deg, #ff4fd8 0%, #ff0080 25%, #00eaff 75%, #00ffff 100%);
-    background-size: 300% 300%;
-    animation: headerGlow 4s ease infinite;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    background: linear-gradient(90deg, #1a0033 0%, #330055 50%, #1a0033 100%);
     position: relative;
-    z-index: 1;
-    box-shadow: 0 0 40px rgba(255, 79, 216, 0.6), 0 0 80px rgba(0, 234, 255, 0.4);
+    z-index: 2;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    border-bottom: 3px solid #ff4fd8;
 }
 
-@keyframes headerGlow {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
 }
 
 .logo {
-    max-width: 400px;
-    width: 80%;
+    max-width: 250px;
     height: auto;
-    filter: drop-shadow(0 0 20px #ff4fd8) drop-shadow(0 0 40px rgba(255, 79, 216, 0.5));
-    animation: logoFloat 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px #ff4fd8);
 }
 
-@keyframes logoFloat {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+.header-title {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
-/* === TABS === */
+.header-title h1 {
+    margin: 0;
+    font-size: 1.8em;
+    color: #ffff00;
+    text-shadow: 0 0 15px rgba(255, 255, 0, 0.6);
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.header-title p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #00eaff;
+    text-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+}
+
+.header-right {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.header-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: right;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+}
+
+.info-label {
+    color: #ff4fd8;
+    font-size: 0.95em;
+}
+
+.info-value {
+    color: #ffff00;
+    font-size: 1.1em;
+    text-shadow: 0 0 8px rgba(255, 255, 0, 0.5);
+}
+
+@media (max-width: 1200px) {
+    header {
+        flex-wrap: wrap;
+    }
+    
+    .header-left {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    .header-right {
+        width: 100%;
+        justify-content: space-around;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+        flex-direction: column;
+    }
+    
+    .logo {
+        max-width: 180px;
+    }
+    
+    .header-title h1 {
+        font-size: 1.4em;
+    }
+}
+
+/* === TABS/NAVIGATION === */
 .tabs {
     display: flex;
     justify-content: center;
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0.8), rgba(50, 0, 80, 0.6), rgba(0, 0, 0, 0.8));
-    padding: 20px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.95), rgba(50, 0, 80, 0.7), rgba(0, 0, 0, 0.95));
+    padding: 15px 20px;
     position: relative;
-    z-index: 1;
-    gap: 10px;
+    z-index: 2;
+    gap: 15px;
+    flex-wrap: wrap;
+    border-bottom: 2px solid #00eaff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .tabs button {
     background: linear-gradient(135deg, #ff4fd8, #ff1493);
-    border: 3px solid #00eaff;
-    padding: 12px 28px;
+    border: 2px solid #ff4fd8;
+    padding: 10px 24px;
     cursor: pointer;
-    font-size: 1.1em;
+    font-size: 1em;
     color: #000;
-    border-radius: 20px;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    font-weight: bold;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 0 15px rgba(255, 79, 216, 0.4);
+    letter-spacing: 0.5px;
+    box-shadow: 0 0 12px rgba(255, 79, 216, 0.4);
     position: relative;
     overflow: hidden;
-}
-
-.tabs button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.5s;
-}
-
-.tabs button:hover::before {
-    left: 100%;
+    will-change: transform;
 }
 
 .tabs button:hover {
     background: linear-gradient(135deg, #00eaff, #00ffff);
-    transform: scale(1.15) translateY(-5px);
-    box-shadow: 0 0 30px rgba(0, 234, 255, 0.8), 0 8px 20px rgba(0, 234, 255, 0.4);
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: 0 0 25px rgba(0, 234, 255, 0.8), 0 5px 15px rgba(0, 234, 255, 0.4);
     color: #000;
+    border-color: #00eaff;
+}
+
+.tabs button:active,
+.tabs button[aria-selected="true"] {
+    background: linear-gradient(135deg, #00eaff, #00ffff);
+    box-shadow: 0 0 25px rgba(0, 234, 255, 0.8);
+    border-color: #ffff00;
 }
 
 /* === TAB CONTENT === */
 .tab-content {
     display: none;
-    padding: 50px 40px;
-    animation: fadeIn 0.5s ease-in;
+    animation: fadeIn 0.4s ease-in;
     position: relative;
     z-index: 1;
+    background: linear-gradient(180deg, rgba(26, 0, 51, 0.5) 0%, transparent 100%);
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .active {
@@ -211,233 +240,160 @@ header {
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    max-width: 100%;
-    margin: auto;
-    padding: 0 20px;
+    gap: 25px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 30px;
 }
 
 /* === COMIC CARDS === */
 .comic-card {
-    background: linear-gradient(135deg, rgba(30, 10, 60, 0.8), rgba(60, 20, 100, 0.8));
-    border: 4px solid #ff4fd8;
-    border-radius: 20px;
-    padding: 15px;
+    background: linear-gradient(135deg, rgba(30, 10, 60, 0.95), rgba(60, 20, 100, 0.95));
+    border: 3px solid #ff4fd8;
+    border-radius: 15px;
+    padding: 0;
+    overflow: hidden;
     text-align: center;
-    box-shadow: 0 0 20px rgba(255, 79, 216, 0.4), 0 0 40px rgba(0, 234, 255, 0.2), inset 0 0 20px rgba(255, 79, 216, 0.1);
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 4px 20px rgba(255, 79, 216, 0.3), 0 0 30px rgba(0, 234, 255, 0.1), inset 0 0 15px rgba(255, 79, 216, 0.08);
+    transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
-}
-
-.comic-card::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
-    animation: shine 3s infinite;
-}
-
-@keyframes shine {
-    0% { transform: translate(-100%, -100%) rotate(45deg); }
-    100% { transform: translate(100%, 100%) rotate(45deg); }
+    will-change: transform, box-shadow;
 }
 
 .comic-card:hover {
-    transform: scale(1.12) translateY(-15px) rotateX(5deg);
-    box-shadow: 0 0 40px rgba(255, 79, 216, 0.8), 0 0 80px rgba(0, 234, 255, 0.6), 0 20px 40px rgba(0, 0, 0, 0.5);
+    transform: translateY(-8px);
+    box-shadow: 0 8px 40px rgba(255, 79, 216, 0.6), 0 0 50px rgba(0, 234, 255, 0.4), inset 0 0 20px rgba(255, 79, 216, 0.1);
     border-color: #00eaff;
     background: linear-gradient(135deg, rgba(60, 20, 100, 1), rgba(100, 40, 150, 1));
 }
 
 .comic-card img {
     width: 100%;
-    height: 400px;
+    height: 320px;
     object-fit: cover;
-    border-radius: 15px;
-    box-shadow: 0 0 15px rgba(255, 79, 216, 0.5);
-    transition: all 0.4s ease;
+    transition: filter 0.3s ease;
     filter: brightness(1);
     flex: 1;
+    display: block;
 }
 
 .comic-card:hover img {
-    filter: brightness(1.2) saturate(1.3);
-    box-shadow: 0 0 30px rgba(0, 234, 255, 0.6);
+    filter: brightness(1.15) saturate(1.2);
+}
+
+.comic-card-content {
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(20, 5, 40, 0.9), rgba(40, 15, 70, 0.9));
 }
 
 .comic-title {
-    margin-top: 15px;
-    font-size: 1.3em;
-    color: #00eaff;
-    font-weight: bold;
+    margin: 0;
+    font-size: 1.2em;
+    color: #ffff00;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    text-shadow: 0 0 10px rgba(0, 234, 255, 0.5), 0 0 20px rgba(255, 79, 216, 0.3);
+    text-shadow: 0 0 12px rgba(255, 255, 0, 0.5), 0 0 20px rgba(255, 79, 216, 0.3);
     transition: all 0.3s ease;
 }
 
 .comic-card:hover .comic-title {
-    color: #ffff00;
-    text-shadow: 0 0 20px rgba(255, 255, 0, 0.8), 0 0 40px rgba(255, 79, 216, 0.6);
-    transform: scale(1.1);
+    color: #00eaff;
+    text-shadow: 0 0 15px rgba(0, 234, 255, 0.8), 0 0 30px rgba(255, 79, 216, 0.5);
 }
 
 /* === FOOTER === */
 footer {
     text-align: center;
-    padding: 30px;
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0.9), rgba(50, 0, 80, 0.7), rgba(0, 0, 0, 0.9));
-    margin-top: 60px;
+    padding: 25px 30px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.95), rgba(50, 0, 80, 0.7), rgba(0, 0, 0, 0.95));
+    margin-top: 40px;
     color: #00eaff;
-    font-weight: bold;
-    font-size: 1.2em;
-    letter-spacing: 2px;
+    font-weight: 700;
+    font-size: 1.1em;
+    letter-spacing: 1.5px;
     text-shadow: 0 0 10px rgba(0, 234, 255, 0.6);
-    box-shadow: 0 -5px 30px rgba(0, 234, 255, 0.3);
+    box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.5);
     position: relative;
     z-index: 1;
-}
-
-/* === FLOATING COMIC ELEMENTS === */
-.comic-element {
-    position: fixed;
-    font-family: 'Impact', 'Arial Black', sans-serif;
-    font-weight: bold;
-    font-size: 2em;
-    opacity: 0.1;
-    pointer-events: none;
-    z-index: 0;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
-    transform-origin: center;
-}
-
-.comic-element:nth-child(1) {
-    top: 15%;
-    left: 10%;
-    color: #ff4fd8;
-    animation: float-comic 6s ease-in-out infinite;
-}
-
-.comic-element:nth-child(2) {
-    top: 60%;
-    right: 12%;
-    color: #00eaff;
-    animation: float-comic 8s ease-in-out infinite reverse;
-    font-size: 2.5em;
-}
-
-.comic-element:nth-child(3) {
-    bottom: 20%;
-    left: 8%;
-    color: #ffff00;
-    animation: float-comic 7s ease-in-out infinite;
-}
-
-.comic-element:nth-child(4) {
-    top: 40%;
-    right: 8%;
-    color: #ff6600;
-    animation: float-comic 9s ease-in-out infinite reverse;
-}
-
-@keyframes float-comic {
-    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
-    25% { transform: translateY(-20px) rotate(3deg) scale(1.05); }
-    50% { transform: translateY(-40px) rotate(-2deg) scale(1.1); }
-    75% { transform: translateY(-20px) rotate(2deg) scale(1.05); }
-}
-
-/* Halftone pattern dots */
-.halftone-dots {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-image: 
-        radial-gradient(circle, rgba(255, 79, 216, 0.08) 1px, transparent 1px),
-        radial-gradient(circle, rgba(0, 234, 255, 0.08) 1px, transparent 1px);
-    background-size: 40px 40px, 60px 60px;
-    background-position: 0 0, 20px 20px;
-    animation: dotsMove 20s linear infinite;
-    pointer-events: none;
-    z-index: 0;
-}
-
-@keyframes dotsMove {
-    0% { background-position: 0 0, 20px 20px; }
-    100% { background-position: 40px 40px, 60px 60px; }
+    border-top: 2px solid #ff4fd8;
 }
 
 /* === RESPONSIVE === */
-/* Tablet & Small Devices */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
     .grid {
-        gap: 30px;
-        padding: 0 15px;
+        gap: 20px;
+        padding: 30px 25px;
     }
     
     .comic-card img {
-        height: 350px;
+        height: 300px;
+    }
+    
+    .header-right {
+        gap: 20px;
     }
 }
 
-/* Medium Devices (Tablets) */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .grid {
-        grid-template-columns: repeat(2, 1fr);
         gap: 20px;
-        padding: 0 10px;
-    }
-    
-    .tabs {
-        flex-wrap: wrap;
-        gap: 8px;
-        padding: 15px;
-    }
-    
-    .tabs button {
-        padding: 10px 18px;
-        font-size: 0.9em;
-        border-radius: 15px;
-        margin: 0;
-    }
-    
-    header {
-        padding: 25px;
-    }
-    
-    .logo {
-        max-width: 300px;
-    }
-    
-    .comic-card {
-        padding: 12px;
+        padding: 25px 20px;
     }
     
     .comic-card img {
         height: 280px;
     }
     
-    .comic-title {
-        font-size: 1.1em;
-        margin-top: 10px;
-    }
-    
-    .tab-content {
-        padding: 30px 15px;
-    }
-    
-    .comic-element {
+    .header-title h1 {
         font-size: 1.5em;
-        opacity: 0.06;
+    }
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 20px 15px;
+    }
+    
+    .comic-card img {
+        height: 240px;
+    }
+    
+    .comic-card-content {
+        padding: 15px;
+    }
+    
+    .comic-title {
+        font-size: 1em;
+    }
+    
+    header {
+        padding: 15px 20px;
+        gap: 15px;
+    }
+    
+    .logo {
+        max-width: 150px;
+    }
+    
+    .header-title h1 {
+        font-size: 1.3em;
+    }
+    
+    .header-right {
+        gap: 15px;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    
+    .tabs button {
+        padding: 8px 16px;
+        font-size: 0.9em;
     }
     
     footer {
@@ -446,63 +402,66 @@ footer {
     }
 }
 
-/* Small Phones */
 @media (max-width: 480px) {
     .grid {
         grid-template-columns: 1fr;
-        gap: 15px;
-        padding: 0 8px;
+        gap: 12px;
+        padding: 15px 10px;
+    }
+    
+    .comic-card img {
+        height: 220px;
+    }
+    
+    .comic-card-content {
+        padding: 12px;
+    }
+    
+    .comic-title {
+        font-size: 0.95em;
+        letter-spacing: 0px;
+    }
+    
+    header {
+        flex-direction: column;
+        padding: 12px 15px;
+    }
+    
+    .header-left {
+        width: 100%;
+    }
+    
+    .logo {
+        max-width: 120px;
+    }
+    
+    .header-title h1 {
+        font-size: 1.1em;
+    }
+    
+    .header-title p {
+        font-size: 0.8em;
+    }
+    
+    .header-right {
+        justify-content: center;
+        gap: 20px;
+    }
+    
+    .header-info {
+        text-align: center;
     }
     
     .tabs {
         flex-direction: column;
-        gap: 10px;
+        gap: 8px;
         padding: 10px;
     }
     
     .tabs button {
         width: 100%;
-        padding: 12px 15px;
-        font-size: 0.95em;
-    }
-    
-    header {
-        padding: 20px;
-    }
-    
-    .logo {
-        max-width: 250px;
-    }
-    
-    .comic-card {
-        padding: 10px;
-    }
-    
-    .comic-card img {
-        height: 250px;
-    }
-    
-    .comic-title {
-        font-size: 1em;
-        margin-top: 8px;
-    }
-    
-    .tab-content {
-        padding: 20px 10px;
-    }
-    
-    .comic-element {
-        font-size: 1.2em;
-        opacity: 0.04;
-        display: none;
-    }
-    
-    .halftone-dots {
-        opacity: 0.5;
-    }
-    
-    body::after {
-        background-size: 80px 80px, 120px 120px, 300% 300%, 300% 300%;
+        padding: 10px 12px;
+        font-size: 0.85em;
     }
     
     footer {
@@ -516,76 +475,91 @@ footer {
 </head>
 <body>
 
-<!-- Floating Comic Elements Background -->
-<div class="halftone-dots"></div>
-<div class="comic-element">POW!</div>
-<div class="comic-element">BOOM!</div>
-<div class="comic-element">ZAP!</div>
-<div class="comic-element">WHAM!</div>
-
-<header>
-    <img src="images/logo.png" alt="Treatmares Logo" class="logo">
+<header role="banner">
+    <div class="header-left">
+        <img src="images/logo.png" alt="Treatmares Webcomic Store Logo" class="logo">
+    </div>
 </header>
 
-<div class="tabs">
-    <button onclick="openTab('main')">Main Story</button>
-    <button onclick="openTab('mini')">Mini Comics</button>
-    <button onclick="openTab('comedy')">Comedy</button>
-</div>
+<nav class="tabs" role="tablist" aria-label="Comic Categories">
+    <button role="tab" aria-selected="true" aria-controls="main">Main Story</button>
+    <button role="tab" aria-selected="false" aria-controls="mini">Mini Comics</button>
+    <button role="tab" aria-selected="false" aria-controls="comedy">Comedy</button>
+</nav>
 
-<!-- MAIN STORY -->
-<div id="main" class="tab-content active">
-    <div class="grid">
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 1</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 2</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 3</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 4</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 5</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 6</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 7</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 8</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 9</div></div>
-    </div>
-</div>
+<main>
+    <!-- MAIN STORY -->
+    <section id="main" role="tabpanel" class="tab-content active">
+        <div class="grid">
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">train to catch!</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 2</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 3</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 4</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 5</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 6</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 7</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 8</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 9</h3></div></article>
+        </div>
+    </section>
 
-<!-- coming soon COMICS -->
-<div id="mini" class="tab-content">
-    <div class="grid">
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 1</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 2</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 3</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 4</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 5</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 6</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 7</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 8</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 9</div></div>
-    </div>
-</div>
+    <!-- MINI COMICS -->
+    <section id="mini" role="tabpanel" class="tab-content">
+        <div class="grid">
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 1</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 2</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 3</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 4</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 5</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 6</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 7</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 8</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 9</h3></div></article>
+        </div>
+    </section>
 
-<!-- COMEDY -->
-<div id="comedy" class="tab-content">
-    <div class="grid">
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 1</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 2</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 3</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 4</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 5</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 6</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 7</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 8</div></div>
-        <div class="comic-card"><img src="images/coming-soon.png"><div class="comic-title">coming soon 9</div></div>
-    </div>
-</div>
+    <!-- COMEDY -->
+    <section id="comedy" role="tabpanel" class="tab-content">
+        <div class="grid">
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 1</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 2</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 3</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 4</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 5</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 6</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 7</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 8</h3></div></article>
+            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 9</h3></div></article>
+        </div>
+    </section>
+</main>
 
-<footer>by marigold cinemas</footer>
+<footer role="contentinfo">by marigold cinemas</footer>
 
 <script>
-function openTab(tabName) {
-    const tabs = document.querySelectorAll('.tab-content');
-    tabs.forEach(tab => tab.classList.remove('active'));
-    document.getElementById(tabName).classList.add('active');
-}
+// Tab switching with event delegation and accessibility
+document.addEventListener('DOMContentLoaded', function() {
+    const tabs = document.querySelectorAll('[role="tab"]');
+    const tabpanels = document.querySelectorAll('[role="tabpanel"]');
+    
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const tabId = this.getAttribute('aria-controls');
+            
+            // Update tab states
+            tabs.forEach(t => {
+                t.setAttribute('aria-selected', 'false');
+            });
+            this.setAttribute('aria-selected', 'true');
+            
+            // Update panel visibility
+            tabpanels.forEach(panel => {
+                panel.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+});
 </script>
 
 </body>
