@@ -3,564 +3,1104 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Treatmares Webcomic Store - Explore our collection of main stories, mini comics, and comedy series.">
-<meta name="theme-color" content="#1a0033">
-<title>Treatmares Webcomic Store</title>
+<title>Treatmares — Webcomic Store</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Bebas+Neue&family=Black+Han+Sans&family=Permanent+Marker&family=Oswald:wght@700&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-
 :root {
-    --primary: #ff4fd8;
-    --secondary: #00eaff;
-    --accent: #ffff00;
-    --dark-bg: #1a0033;
-    --card-bg: rgba(30, 10, 60, 0.8);
-    --shadow-sm: 0 0 20px rgba(255, 79, 216, 0.4);
-    --shadow-md: 0 0 40px rgba(255, 79, 216, 0.8);
+  --pink: #ff4fd8;
+  --cyan: #00eaff;
+  --yellow: #ffe600;
+  --red: #ff1f1f;
+  --dark: #0d0020;
+  --purple: #1a0033;
+  --card-purple: rgba(30, 10, 60, 0.97);
 }
 
-/* === BACKGROUND === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+#bg-canvas {
+  position: fixed; inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  width: 100%; height: 100%;
+}
+
 body {
-    margin: 0;
-    font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    color: #ffffff;
-    background: linear-gradient(135deg, #1a0033 0%, #330055 50%, #1a0033 100%);
-    background-attachment: fixed;
-    overflow-x: hidden;
-    position: relative;
+  font-family: 'Nunito', sans-serif;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(120,0,255,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(255,79,216,0.15) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 60% 40%, rgba(0,234,255,0.08) 0%, transparent 50%),
+    linear-gradient(160deg, #08001a 0%, #0d0020 40%, #110030 70%, #080015 100%);
+  background-attachment: fixed;
+  color: #fff;
+  overflow-x: hidden;
+  min-height: 100vh;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='5' fill='%23ff4fd8' opacity='0.8'/%3E%3C/svg%3E") 12 12, crosshair;
 }
 
+/* Halftone dot layer */
 body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-        radial-gradient(circle at 20% 50%, rgba(255, 79, 216, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(0, 234, 255, 0.08) 0%, transparent 50%);
-    z-index: 0;
-    pointer-events: none;
+  content: "";
+  position: fixed; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,79,216,0.07) 1.5px, transparent 1.5px);
+  background-size: 38px 38px;
+  pointer-events: none; z-index: 0;
+  animation: halftone-drift 20s linear infinite;
 }
 
-/* Halftone pattern dots */
+@keyframes halftone-drift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 38px 38px; }
+}
+
+/* Speed-line radial burst */
 body::after {
-    content: "";
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-image: 
-        radial-gradient(circle, rgba(255, 79, 216, 0.05) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-    z-index: 0;
+  content: "";
+  position: fixed; inset: 0;
+  background: repeating-conic-gradient(
+    from 0deg at 50% 50%,
+    rgba(255,79,216,0.025) 0deg 2deg,
+    transparent 2deg 8deg
+  );
+  pointer-events: none; z-index: 0;
+  animation: lines-spin 80s linear infinite;
 }
 
-/* === HEADER === */
+@keyframes lines-spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ===== HEADER ===== */
 header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 40px;
-    background: linear-gradient(90deg, #1a0033 0%, #330055 50%, #1a0033 100%);
-    position: relative;
-    z-index: 2;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    border-bottom: 3px solid #ff4fd8;
+  position: relative; z-index: 10;
+  padding: 18px 40px;
+  background: linear-gradient(90deg, #0a0015, #1a0033 40%, #0a0015);
+  border-bottom: 4px solid var(--pink);
+  display: flex; align-items: center; gap: 20px;
+  box-shadow: 0 4px 40px rgba(255,79,216,0.5);
 }
 
-.header-left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex: 1;
+.site-logo {
+  height: 90px;
+  width: auto;
+  filter: drop-shadow(0 0 18px rgba(255,79,216,0.7)) drop-shadow(0 0 35px rgba(180,100,255,0.4));
+  transition: filter 0.3s;
 }
 
-.logo {
-    max-width: 250px;
-    height: auto;
-    filter: drop-shadow(0 0 15px #ff4fd8);
+.site-logo:hover {
+  filter: drop-shadow(0 0 25px rgba(255,79,216,1)) drop-shadow(0 0 50px rgba(0,234,255,0.5));
 }
 
-.header-title {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+.header-badge {
+  margin-left: auto;
+  font-family: 'Bangers', cursive;
+  font-size: 1.1em;
+  letter-spacing: 2px;
+  color: var(--pink);
+  border: 2px solid var(--pink);
+  padding: 6px 18px;
+  border-radius: 4px;
+  text-shadow: 0 0 10px var(--pink);
+  box-shadow: 0 0 15px rgba(255,79,216,0.3);
+  animation: pulse-border 2s ease-in-out infinite;
 }
 
-.header-title h1 {
-    margin: 0;
-    font-size: 1.8em;
-    color: #ffff00;
-    text-shadow: 0 0 15px rgba(255, 255, 0, 0.6);
-    font-weight: 800;
-    letter-spacing: 2px;
+@keyframes pulse-border {
+  0%,100% { box-shadow: 0 0 10px rgba(255,79,216,0.3); }
+  50% { box-shadow: 0 0 25px rgba(255,79,216,0.8), inset 0 0 10px rgba(255,79,216,0.1); }
 }
 
-.header-title p {
-    margin: 0;
-    font-size: 0.9em;
-    color: #00eaff;
-    text-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
-}
-
-.header-right {
-    display: flex;
-    gap: 30px;
-    align-items: center;
-}
-
-.header-info {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    text-align: right;
-}
-
-.info-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 700;
-}
-
-.info-label {
-    color: #ff4fd8;
-    font-size: 0.95em;
-}
-
-.info-value {
-    color: #ffff00;
-    font-size: 1.1em;
-    text-shadow: 0 0 8px rgba(255, 255, 0, 0.5);
-}
-
-@media (max-width: 1200px) {
-    header {
-        flex-wrap: wrap;
-    }
-    
-    .header-left {
-        width: 100%;
-        margin-bottom: 15px;
-    }
-    
-    .header-right {
-        width: 100%;
-        justify-content: space-around;
-    }
-}
-
-@media (max-width: 768px) {
-    header {
-        padding: 15px 20px;
-        flex-direction: column;
-    }
-    
-    .logo {
-        max-width: 180px;
-    }
-    
-    .header-title h1 {
-        font-size: 1.4em;
-    }
-}
-
-/* === TABS/NAVIGATION === */
+/* ===== TABS ===== */
 .tabs {
-    display: flex;
-    justify-content: center;
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0.95), rgba(50, 0, 80, 0.7), rgba(0, 0, 0, 0.95));
-    padding: 15px 20px;
-    position: relative;
-    z-index: 2;
-    gap: 15px;
-    flex-wrap: wrap;
-    border-bottom: 2px solid #00eaff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  position: relative; z-index: 9;
+  display: flex; gap: 10px; justify-content: center;
+  padding: 14px 20px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.95), rgba(40,0,70,0.8), rgba(0,0,0,0.95));
+  border-bottom: 3px solid var(--cyan);
+  flex-wrap: wrap;
 }
 
-.tabs button {
-    background: linear-gradient(135deg, #ff4fd8, #ff1493);
-    border: 2px solid #ff4fd8;
-    padding: 10px 24px;
-    cursor: pointer;
-    font-size: 1em;
-    color: #000;
-    border-radius: 25px;
-    transition: all 0.3s ease;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 0 12px rgba(255, 79, 216, 0.4);
-    position: relative;
-    overflow: hidden;
-    will-change: transform;
+.tab-btn {
+  font-family: 'Bangers', cursive;
+  font-size: 1.3em;
+  letter-spacing: 3px;
+  padding: 8px 30px;
+  border: 3px solid var(--pink);
+  background: transparent;
+  color: var(--pink);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.25s;
+  text-shadow: 0 0 10px rgba(255,79,216,0.5);
+  position: relative; overflow: hidden;
 }
 
-.tabs button:hover {
-    background: linear-gradient(135deg, #00eaff, #00ffff);
-    transform: scale(1.08) translateY(-2px);
-    box-shadow: 0 0 25px rgba(0, 234, 255, 0.8), 0 5px 15px rgba(0, 234, 255, 0.4);
-    color: #000;
-    border-color: #00eaff;
+.tab-btn::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: var(--pink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s;
+  z-index: -1;
 }
 
-.tabs button:active,
-.tabs button[aria-selected="true"] {
-    background: linear-gradient(135deg, #00eaff, #00ffff);
-    box-shadow: 0 0 25px rgba(0, 234, 255, 0.8);
-    border-color: #ffff00;
+.tab-btn:hover { color: #000; text-shadow: none; }
+.tab-btn:hover::after { transform: scaleX(1); }
+.tab-btn.active { background: var(--pink); color: #000; text-shadow: none; box-shadow: 0 0 25px rgba(255,79,216,0.8); }
+
+/* ===== MAIN AREA ===== */
+main {
+  position: relative; z-index: 1;
+  min-height: 80vh;
 }
 
-/* === TAB CONTENT === */
-.tab-content {
-    display: none;
-    animation: fadeIn 0.4s ease-in;
-    position: relative;
-    z-index: 1;
-    background: linear-gradient(180deg, rgba(26, 0, 51, 0.5) 0%, transparent 100%);
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ===== BOOKSHELF ===== */
+.bookshelf-container {
+  padding: 50px 30px 30px;
+  max-width: 1300px;
+  margin: 0 auto;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+.shelf-label {
+  font-family: 'Bangers', cursive;
+  font-size: 1.5em;
+  letter-spacing: 5px;
+  color: var(--cyan);
+  text-shadow: 0 0 15px var(--cyan);
+  margin-bottom: 25px;
+  display: flex; align-items: center; gap: 15px;
 }
 
-.active {
-    display: block;
+.shelf-label::before, .shelf-label::after {
+  content: ""; flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan));
+}
+.shelf-label::after { background: linear-gradient(90deg, var(--cyan), transparent); }
+
+/* SHELF WOOD ROW */
+.shelf-row {
+  position: relative;
+  margin-bottom: 60px;
 }
 
-/* === GRID LAYOUT === */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 40px 30px;
+.shelf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0;
+  padding: 20px 20px 0;
+  background: linear-gradient(180deg, rgba(20,5,40,0.4) 0%, rgba(20,5,40,0.2) 100%);
+  border-radius: 4px 4px 0 0;
+  align-items: flex-end;
+  min-height: 280px;
 }
 
-/* === COMIC CARDS === */
-.comic-card {
-    background: linear-gradient(135deg, rgba(30, 10, 60, 0.95), rgba(60, 20, 100, 0.95));
-    border: 3px solid #ff4fd8;
-    border-radius: 15px;
-    padding: 0;
-    overflow: hidden;
-    text-align: center;
-    box-shadow: 0 4px 20px rgba(255, 79, 216, 0.3), 0 0 30px rgba(0, 234, 255, 0.1), inset 0 0 15px rgba(255, 79, 216, 0.08);
-    transition: all 0.3s ease;
-    cursor: pointer;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    will-change: transform, box-shadow;
+/* Wooden shelf plank */
+.shelf-plank {
+  height: 22px;
+  background: linear-gradient(180deg, #5c3a1e 0%, #3d2410 40%, #2a1a0c 100%);
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.8), inset 0 2px 4px rgba(255,200,100,0.15);
+  position: relative;
 }
 
-.comic-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 40px rgba(255, 79, 216, 0.6), 0 0 50px rgba(0, 234, 255, 0.4), inset 0 0 20px rgba(255, 79, 216, 0.1);
-    border-color: #00eaff;
-    background: linear-gradient(135deg, rgba(60, 20, 100, 1), rgba(100, 40, 150, 1));
+.shelf-plank::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg, transparent 0px, transparent 80px, rgba(0,0,0,0.1) 80px, rgba(0,0,0,0.1) 82px);
+  border-radius: inherit;
 }
 
-.comic-card img {
-    width: 100%;
-    height: 320px;
-    object-fit: cover;
-    transition: filter 0.3s ease;
-    filter: brightness(1);
-    flex: 1;
-    display: block;
+/* Shelf shadow on wall */
+.shelf-plank::after {
+  content: "";
+  position: absolute;
+  bottom: -15px; left: 0; right: 0;
+  height: 15px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.5), transparent);
+  pointer-events: none;
 }
 
-.comic-card:hover img {
-    filter: brightness(1.15) saturate(1.2);
+/* ===== BOOK SPINE ===== */
+.book-spine {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s cubic-bezier(.34,1.56,.64,1);
+  transform-origin: bottom center;
+  padding: 0 4px;
 }
 
-.comic-card-content {
-    padding: 20px;
-    background: linear-gradient(135deg, rgba(20, 5, 40, 0.9), rgba(40, 15, 70, 0.9));
+.book-spine:hover {
+  transform: translateY(-20px) scale(1.05);
+  z-index: 5;
 }
 
-.comic-title {
-    margin: 0;
-    font-size: 1.2em;
-    color: #ffff00;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-shadow: 0 0 12px rgba(255, 255, 0, 0.5), 0 0 20px rgba(255, 79, 216, 0.3);
-    transition: all 0.3s ease;
+.book-cover {
+  width: 100%;
+  max-width: 150px;
+  height: 220px;
+  border-radius: 2px 8px 8px 2px;
+  overflow: hidden;
+  position: relative;
+  box-shadow:
+    -4px 0 8px rgba(0,0,0,0.8),
+    4px 0 12px rgba(0,0,0,0.4),
+    inset -3px 0 6px rgba(0,0,0,0.5),
+    inset 3px 0 6px rgba(255,255,255,0.05);
+  background: linear-gradient(135deg, #1a0033, #330055);
+  border-left: 4px solid rgba(255,255,255,0.1);
 }
 
-.comic-card:hover .comic-title {
-    color: #00eaff;
-    text-shadow: 0 0 15px rgba(0, 234, 255, 0.8), 0 0 30px rgba(255, 79, 216, 0.5);
+.book-cover img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: filter 0.3s;
 }
 
-/* === FOOTER === */
+.book-spine:hover .book-cover img {
+  filter: brightness(1.2) saturate(1.3);
+}
+
+/* Spine shine effect */
+.book-cover::before {
+  content: "";
+  position: absolute; top: 0; left: 0;
+  width: 25%; height: 100%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.08), transparent);
+  z-index: 2; pointer-events: none;
+}
+
+/* Glow on hover */
+.book-spine:hover .book-cover {
+  box-shadow:
+    -4px 0 8px rgba(0,0,0,0.8),
+    4px 0 25px rgba(255,79,216,0.6),
+    0 0 30px rgba(0,234,255,0.3),
+    inset -3px 0 6px rgba(0,0,0,0.5);
+}
+
+.book-title-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.72em;
+  letter-spacing: 1.5px;
+  color: var(--cyan);
+  text-align: center;
+  margin-top: 8px;
+  text-shadow: 0 0 8px var(--cyan);
+  max-width: 130px;
+  line-height: 1.2;
+}
+
+/* Coming soon placeholder cover */
+.cs-cover {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #0f0025, #1a0040, #0a0020);
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cs-cover::after {
+  content: "?";
+  font-family: 'Bangers', cursive;
+  font-size: 5em;
+  color: rgba(255,79,216,0.15);
+  position: absolute;
+  bottom: -10px; right: 5px;
+}
+
+.cs-dots {
+  display: grid;
+  grid-template-columns: repeat(3,8px);
+  gap: 5px;
+}
+
+.cs-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--pink);
+  opacity: 0.3;
+  animation: cs-pulse 1.5s ease-in-out infinite;
+}
+.cs-dot:nth-child(2) { animation-delay: 0.2s; background: var(--cyan); }
+.cs-dot:nth-child(3) { animation-delay: 0.4s; background: var(--yellow); }
+.cs-dot:nth-child(4) { animation-delay: 0.15s; background: var(--yellow); }
+.cs-dot:nth-child(5) { animation-delay: 0.35s; background: var(--pink); }
+.cs-dot:nth-child(6) { animation-delay: 0.55s; background: var(--cyan); }
+.cs-dot:nth-child(7) { animation-delay: 0.3s; background: var(--cyan); }
+.cs-dot:nth-child(8) { animation-delay: 0.5s; background: var(--yellow); }
+.cs-dot:nth-child(9) { animation-delay: 0.7s; background: var(--pink); }
+
+@keyframes cs-pulse {
+  0%,100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.3); }
+}
+
+.cs-text {
+  font-family: 'Bangers', cursive;
+  font-size: 0.9em;
+  letter-spacing: 2px;
+  color: var(--pink);
+  text-shadow: 0 0 10px var(--pink);
+  z-index: 1;
+}
+
+/* ===== BOOK DETAIL VIEW ===== */
+#detail-overlay {
+  position: fixed; inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+}
+
+#detail-overlay.open {
+  pointer-events: all;
+  opacity: 1;
+}
+
+/* Dark curtain */
+.detail-curtain {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.92);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+#detail-overlay.open .detail-curtain { opacity: 1; }
+
+/* FNF-style bars */
+.bar-top, .bar-bottom {
+  position: absolute; left: 0; right: 0;
+  height: 90px;
+  display: flex; align-items: center;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.bar-top {
+  top: 0;
+  transform: translateY(-100%);
+  transition: transform 0.5s cubic-bezier(.23,1,.32,1);
+  background: linear-gradient(90deg, #000, #0a0020, #000);
+  border-bottom: 4px solid var(--pink);
+}
+
+.bar-bottom {
+  bottom: 0;
+  transform: translateY(100%);
+  transition: transform 0.5s cubic-bezier(.23,1,.32,1);
+  background: linear-gradient(90deg, #000, #0a0020, #000);
+  border-top: 4px solid var(--cyan);
+  justify-content: flex-end;
+}
+
+#detail-overlay.open .bar-top { transform: translateY(0); }
+#detail-overlay.open .bar-bottom { transform: translateY(0); }
+
+.bar-top-inner {
+  display: flex; align-items: center;
+  width: 100%;
+  padding: 0 40px;
+  gap: 20px;
+}
+
+.bar-title {
+  font-family: 'Bangers', cursive;
+  font-size: 3em;
+  letter-spacing: 6px;
+  color: var(--yellow);
+  text-shadow: 3px 3px 0 var(--pink), 6px 6px 0 rgba(255,79,216,0.3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.bar-scrolling-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1em;
+  letter-spacing: 4px;
+  color: var(--cyan);
+  opacity: 0.5;
+  white-space: nowrap;
+  animation: scroll-marquee 12s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes scroll-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+.bar-bottom-inner {
+  display: flex; align-items: center;
+  width: 100%;
+  padding: 0 40px;
+  gap: 20px;
+  justify-content: flex-end;
+}
+
+.bar-category {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3em;
+  letter-spacing: 5px;
+  color: var(--cyan);
+  text-shadow: 0 0 15px var(--cyan);
+}
+
+/* Detail content */
+.detail-content {
+  position: absolute;
+  inset: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  z-index: 2;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.5s 0.3s cubic-bezier(.23,1,.32,1);
+}
+
+#detail-overlay.open .detail-content {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Book preview (left side) */
+.detail-book {
+  flex-shrink: 0;
+  width: 280px;
+  position: relative;
+}
+
+.detail-book-cover {
+  width: 100%;
+  aspect-ratio: 2/3;
+  border-radius: 4px 12px 12px 4px;
+  overflow: hidden;
+  box-shadow:
+    -8px 4px 20px rgba(0,0,0,0.9),
+    8px 0 40px rgba(255,79,216,0.5),
+    0 0 60px rgba(0,234,255,0.3);
+  animation: float-book 3s ease-in-out infinite;
+  border-left: 8px solid rgba(255,255,255,0.08);
+}
+
+@keyframes float-book {
+  0%,100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-12px) rotate(1deg); }
+}
+
+.detail-book-cover img,
+.detail-book-cover .cs-cover {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+/* Detail info (right side) */
+.detail-info {
+  max-width: 420px;
+  display: flex; flex-direction: column;
+  gap: 20px;
+}
+
+.detail-comic-title {
+  font-family: 'Bangers', cursive;
+  font-size: 3.5em;
+  letter-spacing: 4px;
+  color: var(--yellow);
+  line-height: 0.95;
+  text-shadow: 4px 4px 0 var(--pink);
+}
+
+.detail-coming-soon-badge {
+  display: inline-flex;
+  align-items: center; gap: 10px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3em;
+  letter-spacing: 4px;
+  color: #000;
+  background: var(--yellow);
+  padding: 6px 18px;
+  border-radius: 3px;
+  animation: badge-shake 0.5s ease-in-out infinite alternate;
+  box-shadow: 4px 4px 0 var(--pink), 0 0 20px rgba(255,230,0,0.5);
+}
+
+@keyframes badge-shake {
+  0% { transform: rotate(-1deg) scale(1); }
+  100% { transform: rotate(1deg) scale(1.03); }
+}
+
+.detail-desc {
+  font-size: 1em;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.7;
+  font-weight: 700;
+}
+
+/* READ button */
+.btn-read {
+  font-family: 'Bangers', cursive;
+  font-size: 2em;
+  letter-spacing: 6px;
+  padding: 14px 50px;
+  background: transparent;
+  border: 4px solid var(--cyan);
+  color: var(--cyan);
+  cursor: pointer;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  text-shadow: 0 0 15px var(--cyan);
+  align-self: flex-start;
+  box-shadow: 0 0 20px rgba(0,234,255,0.3), inset 0 0 20px rgba(0,234,255,0.05);
+}
+
+.btn-read::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: var(--cyan);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+  z-index: -1;
+}
+
+.btn-read:hover { color: #000; text-shadow: none; box-shadow: 0 0 40px rgba(0,234,255,0.8); }
+.btn-read:hover::before { transform: scaleX(1); }
+
+.btn-read.disabled {
+  border-color: rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.3);
+  text-shadow: none;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+.btn-read.disabled::before { display: none; }
+
+/* Close button */
+.btn-close {
+  position: absolute;
+  top: 100px; right: 30px;
+  z-index: 10;
+  font-family: 'Bangers', cursive;
+  font-size: 1.5em;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.5);
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.2);
+  padding: 8px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.btn-close:hover {
+  color: var(--pink);
+  border-color: var(--pink);
+  box-shadow: 0 0 20px rgba(255,79,216,0.5);
+}
+
+/* Coming soon FLASH effect */
+.flash-overlay {
+  position: fixed; inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+}
+
+.flash-overlay.boom {
+  animation: flash-out 0.8s ease-out forwards;
+}
+
+@keyframes flash-out {
+  0% { opacity: 1; background: var(--yellow); }
+  20% { opacity: 0.8; background: var(--pink); }
+  40% { opacity: 0.6; background: var(--cyan); }
+  100% { opacity: 0; }
+}
+
+.flash-text {
+  font-family: 'Bangers', cursive;
+  font-size: 8em;
+  color: #000;
+  letter-spacing: 8px;
+  text-shadow: 6px 6px 0 rgba(0,0,0,0.3);
+  transform: rotate(-5deg);
+  animation: flash-text-in 0.3s ease-out;
+}
+
+@keyframes flash-text-in {
+  0% { transform: rotate(-5deg) scale(0.3); }
+  70% { transform: rotate(-5deg) scale(1.15); }
+  100% { transform: rotate(-5deg) scale(1); }
+}
+
+/* Speed lines for coming soon */
+.speed-lines {
+  position: absolute; inset: 0;
+  background: repeating-conic-gradient(
+    rgba(0,0,0,0.15) 0deg,
+    rgba(0,0,0,0.15) 1deg,
+    transparent 1deg,
+    transparent 5deg
+  );
+  animation: spin-lines 0.5s linear;
+}
+
+@keyframes spin-lines {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(30deg); }
+}
+
+/* Halftone burst for CS */
+.cs-burst {
+  position: absolute;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: var(--yellow);
+  animation: burst-in 0.4s ease-out forwards;
+  transform-origin: center;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  opacity: 0;
+}
+
+/* ===== CS DETAIL SPECIAL ===== */
+.cs-detail-art {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, #0a0020, #1a0040, #0f0030);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+
+.cs-detail-question {
+  font-family: 'Bangers', cursive;
+  font-size: 8em;
+  color: rgba(255,79,216,0.2);
+  position: absolute;
+  animation: q-float 2s ease-in-out infinite;
+}
+
+@keyframes q-float {
+  0%,100% { transform: scale(1) rotate(-5deg); }
+  50% { transform: scale(1.1) rotate(5deg); }
+}
+
+.cs-detail-halftone {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,79,216,0.08) 2px, transparent 2px);
+  background-size: 20px 20px;
+}
+
+/* ===== PARTICLES ===== */
+.particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 50%;
+  animation: particle-fly 0.8s ease-out forwards;
+}
+
+@keyframes particle-fly {
+  0% { transform: translate(0,0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+}
+
+/* ===== FOOTER ===== */
 footer {
-    text-align: center;
-    padding: 25px 30px;
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0.95), rgba(50, 0, 80, 0.7), rgba(0, 0, 0, 0.95));
-    margin-top: 40px;
-    color: #00eaff;
-    font-weight: 700;
-    font-size: 1.1em;
-    letter-spacing: 1.5px;
-    text-shadow: 0 0 10px rgba(0, 234, 255, 0.6);
-    box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.5);
-    position: relative;
-    z-index: 1;
-    border-top: 2px solid #ff4fd8;
+  position: relative; z-index: 1;
+  text-align: center;
+  padding: 22px 30px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.95), rgba(40,0,70,0.8), rgba(0,0,0,0.95));
+  border-top: 3px solid var(--pink);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1em;
+  letter-spacing: 5px;
+  color: var(--cyan);
+  text-shadow: 0 0 10px var(--cyan);
 }
 
-/* === RESPONSIVE === */
-@media (max-width: 1200px) {
-    .grid {
-        gap: 20px;
-        padding: 30px 25px;
-    }
-    
-    .comic-card img {
-        height: 300px;
-    }
-    
-    .header-right {
-        gap: 20px;
-    }
-}
-
-@media (max-width: 1024px) {
-    .grid {
-        gap: 20px;
-        padding: 25px 20px;
-    }
-    
-    .comic-card img {
-        height: 280px;
-    }
-    
-    .header-title h1 {
-        font-size: 1.5em;
-    }
-}
-
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        padding: 20px 15px;
-    }
-    
-    .comic-card img {
-        height: 240px;
-    }
-    
-    .comic-card-content {
-        padding: 15px;
-    }
-    
-    .comic-title {
-        font-size: 1em;
-    }
-    
-    header {
-        padding: 15px 20px;
-        gap: 15px;
-    }
-    
-    .logo {
-        max-width: 150px;
-    }
-    
-    .header-title h1 {
-        font-size: 1.3em;
-    }
-    
-    .header-right {
-        gap: 15px;
-        flex-wrap: wrap;
-        width: 100%;
-    }
-    
-    .tabs button {
-        padding: 8px 16px;
-        font-size: 0.9em;
-    }
-    
-    footer {
-        padding: 20px;
-        font-size: 1em;
-    }
+  .logo-text { font-size: 2em; }
+  .shelf-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+  .book-cover { height: 170px; }
+  .detail-content { flex-direction: column; gap: 25px; padding: 10px; }
+  .detail-book { width: 160px; }
+  .detail-comic-title { font-size: 2.2em; }
+  .bar-title { font-size: 1.8em; }
+  .btn-read { font-size: 1.4em; }
+  .bar-top, .bar-bottom { height: 70px; }
+  .detail-content { inset: 70px; }
+  .btn-close { top: 80px; }
 }
-
-@media (max-width: 480px) {
-    .grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-        padding: 15px 10px;
-    }
-    
-    .comic-card img {
-        height: 220px;
-    }
-    
-    .comic-card-content {
-        padding: 12px;
-    }
-    
-    .comic-title {
-        font-size: 0.95em;
-        letter-spacing: 0px;
-    }
-    
-    header {
-        flex-direction: column;
-        padding: 12px 15px;
-    }
-    
-    .header-left {
-        width: 100%;
-    }
-    
-    .logo {
-        max-width: 120px;
-    }
-    
-    .header-title h1 {
-        font-size: 1.1em;
-    }
-    
-    .header-title p {
-        font-size: 0.8em;
-    }
-    
-    .header-right {
-        justify-content: center;
-        gap: 20px;
-    }
-    
-    .header-info {
-        text-align: center;
-    }
-    
-    .tabs {
-        flex-direction: column;
-        gap: 8px;
-        padding: 10px;
-    }
-    
-    .tabs button {
-        width: 100%;
-        padding: 10px 12px;
-        font-size: 0.85em;
-    }
-    
-    footer {
-        padding: 15px;
-        font-size: 0.9em;
-        letter-spacing: 0.5px;
-    }
-}
-
 </style>
 </head>
 <body>
 
-<header role="banner">
-    <div class="header-left">
-        <img src="images/logo.png" alt="Treatmares Webcomic Store Logo" class="logo">
-    </div>
+<!-- ANIMATED BG CANVAS -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- FLASH OVERLAY -->
+<div class="flash-overlay" id="flash-overlay">
+  <div class="speed-lines"></div>
+  <div class="flash-text" id="flash-text">COMING SOON!</div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <img src="images/logo.png" alt="Treatmares" class="site-logo">
+  <div class="header-badge">by marigold cinemas</div>
 </header>
 
-<nav class="tabs" role="tablist" aria-label="Comic Categories">
-    <button role="tab" aria-selected="true" aria-controls="main">Main Story</button>
-    <button role="tab" aria-selected="false" aria-controls="mini">Mini Comics</button>
-    <button role="tab" aria-selected="false" aria-controls="comedy">Comedy</button>
+<!-- TABS -->
+<nav class="tabs">
+  <button class="tab-btn active" data-tab="main">Main Story</button>
+  <button class="tab-btn" data-tab="mini">Mini Comics</button>
+  <button class="tab-btn" data-tab="comedy">Comedy</button>
 </nav>
 
+<!-- MAIN -->
 <main>
-    <!-- MAIN STORY -->
-    <section id="main" role="tabpanel" class="tab-content active">
-        <div class="grid">
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">train to catch!</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 2</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 3</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 4</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 5</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 6</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 7</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 8</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 9</h3></div></article>
-        </div>
-    </section>
 
-    <!-- MINI COMICS -->
-    <section id="mini" role="tabpanel" class="tab-content">
-        <div class="grid">
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 1</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 2</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 3</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 4</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 5</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 6</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 7</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 8</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 9</h3></div></article>
-        </div>
-    </section>
+  <!-- MAIN STORY -->
+  <div class="tab-panel active" id="tab-main">
+    <div class="bookshelf-container">
+      <div class="shelf-label">Main Story</div>
+      <div class="shelf-row">
+        <div class="shelf-grid" id="shelf-main"></div>
+        <div class="shelf-plank"></div>
+      </div>
+    </div>
+  </div>
 
-    <!-- COMEDY -->
-    <section id="comedy" role="tabpanel" class="tab-content">
-        <div class="grid">
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 1</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 2</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 3</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 4</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 5</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 6</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 7</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 8</h3></div></article>
-            <article class="comic-card"><img src="images/coming-soon.png" alt="Coming Soon"><div class="comic-card-content"><h3 class="comic-title">Coming Soon 9</h3></div></article>
-        </div>
-    </section>
+  <!-- MINI COMICS -->
+  <div class="tab-panel" id="tab-mini">
+    <div class="bookshelf-container">
+      <div class="shelf-label">Mini Comics</div>
+      <div class="shelf-row">
+        <div class="shelf-grid" id="shelf-mini"></div>
+        <div class="shelf-plank"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMEDY -->
+  <div class="tab-panel" id="tab-comedy">
+    <div class="bookshelf-container">
+      <div class="shelf-label">Comedy Series</div>
+      <div class="shelf-row">
+        <div class="shelf-grid" id="shelf-comedy"></div>
+        <div class="shelf-plank"></div>
+      </div>
+    </div>
+  </div>
+
 </main>
 
-<footer role="contentinfo">by marigold cinemas</footer>
+<!-- DETAIL OVERLAY -->
+<div id="detail-overlay">
+  <div class="detail-curtain"></div>
+
+  <div class="bar-top">
+    <div class="bar-top-inner">
+      <span class="bar-title" id="bar-title">TITLE</span>
+      <span class="bar-scrolling-text">&nbsp;</span>
+    </div>
+  </div>
+
+  <div class="bar-bottom">
+    <div class="bar-bottom-inner">
+      <span class="bar-category" id="bar-category">MAIN STORY</span>
+    </div>
+  </div>
+
+  <div class="detail-content">
+    <div class="detail-book">
+      <div class="detail-book-cover" id="detail-cover"></div>
+    </div>
+    <div class="detail-info">
+      <div class="detail-comic-title" id="detail-title"></div>
+      <div id="detail-badge"></div>
+      <div class="detail-desc" id="detail-desc"></div>
+      <button class="btn-read" id="btn-read">◀ READ ▶</button>
+    </div>
+  </div>
+
+  <button class="btn-close" id="btn-close">✕ CLOSE</button>
+</div>
+
+<footer>© MARIGOLD CINEMAS — ALL RIGHTS RESERVED</footer>
 
 <script>
-// Tab switching with event delegation and accessibility
-document.addEventListener('DOMContentLoaded', function() {
-    const tabs = document.querySelectorAll('[role="tab"]');
-    const tabpanels = document.querySelectorAll('[role="tabpanel"]');
-    
-    tabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-            const tabId = this.getAttribute('aria-controls');
-            
-            // Update tab states
-            tabs.forEach(t => {
-                t.setAttribute('aria-selected', 'false');
-            });
-            this.setAttribute('aria-selected', 'true');
-            
-            // Update panel visibility
-            tabpanels.forEach(panel => {
-                panel.classList.remove('active');
-            });
-            document.getElementById(tabId).classList.add('active');
-        });
-    });
-});
-</script>
+// ===== DATA =====
+const comics = {
+  main: [
+    { title: "Train to Catch!", img: null, comingSoon: false, file: "comics/main/train-to-catch/index.html", desc: "After getting into some trouble with 2 bandits callie and the gang find a mysterious train..." },
+    { title: "Gone Campin'", img: null, comingSoon: true, desc: "A trip into the woods. what could go wrong?" },
+    { title: "Deal of a Lifetime", img: null, comingSoon: true, desc: "Every bargain has a price. This one costs more than you have." },
+    { title: "Croak of the Damned", img: null, comingSoon: true, desc: "Its all fun and games, untill you hear the croak.." },
+    { title: "It Lurks Below", img: null, comingSoon: true, desc: "The deeper you dive, the louder it breathes." },
+    { title: "Double the Trouble", img: null, comingSoon: true, desc: "Two of them. One problem. Infinite chaos." },
+  ],
+  mini: [
+    { title: "poppy's EGGstravaganza", img: null, comingSoon: true, desc: "its easter! most wonderful time of the year! callie and the gang decide to participate in the yearly egg hunt. what could go wrong?" }
+  ],
+  comedy: [
+    { title: "/", img: null, comingSoon: true, desc: "/" },
+  ]
+};
 
+const categoryNames = { main: "MAIN STORY", mini: "MINI COMICS", comedy: "COMEDY SERIES" };
+
+// Spine gradient colors — cycling
+const spineColors = [
+  ["#ff4fd8","#7a00ff"],["#00eaff","#0040ff"],["#ffe600","#ff4f00"],
+  ["#ff1f1f","#7a0000"],["#00ff88","#006633"],["#ff4fd8","#00eaff"],
+  ["#7a00ff","#0040ff"],["#ffe600","#7a6600"],
+];
+
+function buildShelf(shelfId, category) {
+  const shelf = document.getElementById(shelfId);
+  comics[category].forEach((comic, i) => {
+    const colors = spineColors[i % spineColors.length];
+    const spine = document.createElement('div');
+    spine.className = 'book-spine';
+    spine.innerHTML = `
+      <div class="book-cover" style="background: linear-gradient(135deg, ${colors[0]}22, ${colors[1]}44)">
+        ${comic.img
+          ? `<img src="${comic.img}" alt="${comic.title}">`
+          : `<div class="cs-cover" style="background: linear-gradient(135deg, ${colors[0]}22, ${colors[1]}33, #0a0020)">
+               <div class="cs-dots">${Array(9).fill('<div class="cs-dot"></div>').join('')}</div>
+               <div class="cs-text">???</div>
+             </div>`}
+      </div>
+      <div class="book-title-label">${comic.title}</div>
+    `;
+    spine.addEventListener('click', () => openDetail(comic, category, spine));
+    spine.addEventListener('click', spawnParticles);
+    shelf.appendChild(spine);
+  });
+}
+
+// ===== PARTICLES =====
+function spawnParticles(e) {
+  const colors = ['#ff4fd8','#00eaff','#ffe600','#ff1f1f','#ffffff'];
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = 6 + Math.random() * 8;
+    const angle = Math.random() * 360;
+    const dist = 60 + Math.random() * 100;
+    const dx = Math.cos(angle * Math.PI/180) * dist;
+    const dy = Math.sin(angle * Math.PI/180) * dist;
+    p.style.cssText = `
+      width: ${size}px; height: ${size}px;
+      background: ${colors[Math.floor(Math.random()*colors.length)]};
+      left: ${e.clientX}px; top: ${e.clientY}px;
+      --dx: ${dx}px; --dy: ${dy}px;
+      animation-duration: ${0.5 + Math.random()*0.4}s;
+    `;
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 900);
+  }
+}
+
+// ===== DETAIL VIEW =====
+let currentComingSoon = false;
+
+function openDetail(comic, category, spineEl) {
+  currentComingSoon = comic.comingSoon;
+
+  // Set bar title
+  document.getElementById('bar-title').textContent = comic.title.toUpperCase();
+  document.getElementById('bar-category').textContent = categoryNames[category];
+  document.getElementById('detail-title').textContent = comic.title;
+
+  // Cover
+  const cover = document.getElementById('detail-cover');
+  if (comic.img) {
+    cover.innerHTML = `<img src="${comic.img}" alt="${comic.title}" style="width:100%;height:100%;object-fit:cover;">`;
+  } else {
+    cover.innerHTML = `
+      <div class="cs-detail-art">
+        <div class="cs-detail-halftone"></div>
+        <div class="cs-detail-question">?</div>
+      </div>`;
+  }
+
+  // Badge & desc
+  const badge = document.getElementById('detail-badge');
+  if (comic.comingSoon) {
+    badge.innerHTML = `<span class="detail-coming-soon-badge">⚡ COMING SOON ⚡</span>`;
+  } else {
+    badge.innerHTML = '';
+  }
+
+  document.getElementById('detail-desc').textContent = comic.desc || '';
+
+  // Read button
+  const btnRead = document.getElementById('btn-read');
+  if (comic.comingSoon) {
+    btnRead.className = 'btn-read disabled';
+    btnRead.onclick = triggerComingSoonFlash;
+  } else {
+    btnRead.className = 'btn-read';
+    btnRead.onclick = () => { if (comic.file) window.open(comic.file, '_blank'); };
+  }
+
+  // Open overlay
+  document.getElementById('detail-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetail() {
+  document.getElementById('detail-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function triggerComingSoonFlash() {
+  const flashMessages = ["COMING SOON!", "NOT YET!", "PATIENCE!", "STAY TUNED!", "HOLD UP!"];
+  const msg = flashMessages[Math.floor(Math.random()*flashMessages.length)];
+  const overlay = document.getElementById('flash-overlay');
+  document.getElementById('flash-text').textContent = msg;
+  overlay.classList.remove('boom');
+  void overlay.offsetWidth; // reflow
+  overlay.classList.add('boom');
+}
+
+document.getElementById('btn-close').addEventListener('click', closeDetail);
+document.querySelector('.detail-curtain').addEventListener('click', closeDetail);
+
+// Keyboard close
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeDetail();
+});
+
+// ===== TABS =====
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById('tab-' + this.dataset.tab).classList.add('active');
+  });
+});
+
+// ===== ANIMATED BACKGROUND CANVAS =====
+(function() {
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Floating orbs
+  const orbs = Array.from({ length: 9 }, (_, i) => ({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    r: 80 + Math.random() * 180,
+    dx: (Math.random() - 0.5) * 0.3,
+    dy: (Math.random() - 0.5) * 0.3,
+    color: [
+      'rgba(255,79,216,',
+      'rgba(0,234,255,',
+      'rgba(120,0,255,',
+      'rgba(255,230,0,',
+    ][i % 4],
+    alpha: 0.04 + Math.random() * 0.07,
+    phase: Math.random() * Math.PI * 2,
+    speed: 0.003 + Math.random() * 0.005,
+  }));
+
+  // Floating comic-panel style rectangles
+  const panels = Array.from({ length: 5 }, () => ({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    w: 60 + Math.random() * 120,
+    h: 80 + Math.random() * 160,
+    rot: (Math.random() - 0.5) * 0.4,
+    drot: (Math.random() - 0.5) * 0.0005,
+    dy: -0.15 - Math.random() * 0.2,
+    alpha: 0.03 + Math.random() * 0.05,
+    color: ['#ff4fd8','#00eaff','#ffe600','#7a00ff','#ff1f1f'][Math.floor(Math.random()*5)],
+  }));
+
+  function drawFrame(t) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Orbs
+    orbs.forEach(o => {
+      o.phase += o.speed;
+      o.x += o.dx + Math.sin(o.phase) * 0.4;
+      o.y += o.dy + Math.cos(o.phase * 0.7) * 0.3;
+      if (o.x < -o.r) o.x = canvas.width + o.r;
+      if (o.x > canvas.width + o.r) o.x = -o.r;
+      if (o.y < -o.r) o.y = canvas.height + o.r;
+      if (o.y > canvas.height + o.r) o.y = -o.r;
+
+      const pulse = 0.8 + 0.2 * Math.sin(o.phase * 1.3);
+      const g = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, o.r * pulse);
+      g.addColorStop(0, o.color + (o.alpha * 1.5) + ')');
+      g.addColorStop(0.5, o.color + o.alpha + ')');
+      g.addColorStop(1, o.color + '0)');
+      ctx.beginPath();
+      ctx.arc(o.x, o.y, o.r * pulse, 0, Math.PI * 2);
+      ctx.fillStyle = g;
+      ctx.fill();
+    });
+
+    // Floating panels (comic strip aesthetic)
+    panels.forEach(p => {
+      p.y += p.dy;
+      p.rot += p.drot;
+      if (p.y + p.h < -50) {
+        p.y = canvas.height + 50;
+        p.x = Math.random() * canvas.width;
+      }
+      ctx.save();
+      ctx.translate(p.x + p.w/2, p.y + p.h/2);
+      ctx.rotate(p.rot);
+      ctx.strokeStyle = p.color;
+      ctx.lineWidth = 2;
+      ctx.globalAlpha = p.alpha;
+      ctx.strokeRect(-p.w/2, -p.h/2, p.w, p.h);
+      ctx.globalAlpha = p.alpha * 0.3;
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+      ctx.restore();
+      ctx.globalAlpha = 1;
+    });
+
+    requestAnimationFrame(drawFrame);
+  }
+
+  requestAnimationFrame(drawFrame);
+})();
+buildShelf('shelf-main', 'main');
+buildShelf('shelf-mini', 'mini');
+buildShelf('shelf-comedy', 'comedy');
+</script>
 </body>
 </html>
