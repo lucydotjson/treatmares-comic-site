@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poppy's EGGstravaganza - Teaser</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #1a0d00 0%, #2a1a0a 50%, #1a0d00 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .comic-container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(0,0,0,0.8);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 0 50px rgba(255, 230, 0, 0.1);
+            border: 2px solid rgba(255, 230, 0, 0.2);
+        }
+
+        .comic-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .comic-title {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(2em, 5vw, 3em);
+            color: #ffe600;
+            text-shadow: 3px 3px 0 rgba(160, 80, 0, 0.8);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .comic-subtitle {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2em;
+            color: rgba(255, 230, 0, 0.8);
+            letter-spacing: 1px;
+        }
+
+        .teaser-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .teaser-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(255, 230, 0, 0.2);
+            border: 2px solid rgba(255, 230, 0, 0.3);
+        }
+
+        .question-marks {
+            display: flex;
+            gap: 20px;
+            font-size: clamp(3em, 8vw, 5em);
+            color: #ffe600;
+            text-shadow: 0 0 20px rgba(255, 230, 0, 0.5);
+            animation: bounce 2s infinite;
+        }
+
+        .question-marks span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .question-marks span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .coming-soon-text {
+            text-align: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5em;
+            color: rgba(255, 230, 0, 0.9);
+            letter-spacing: 2px;
+            margin-top: 20px;
+        }
+
+        .back-button {
+            margin-top: 40px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #ffe600, #ffaa00);
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Bangers', cursive;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 230, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .comic-container {
+                padding: 20px;
+            }
+
+            .question-marks {
+                gap: 10px;
+                font-size: 3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="comic-container">
+        <div class="comic-header">
+            <div class="comic-title">POPPY'S EGGSTRAVAGANZA</div>
+            <div class="comic-subtitle">MINI COMIC TEASER</div>
+        </div>
+
+        <div class="teaser-content">
+            <img src="../../../images/comics/1.png" alt="Poppy's EGGstravaganza Teaser" class="teaser-image">
+
+            <div class="question-marks">
+                <span>?</span>
+                <span>?</span>
+                <span>?</span>
+            </div>
+
+            <div class="coming-soon-text">
+                FULL COMIC COMING SOON!
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="../../index.html" class="back-button">← BACK TO LIBRARY</a>
+        </div>
+    </div>
+</body>
+</html>
